@@ -8,9 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-
-
-///CT_Device_OV788_Camera_OK, CT_Device_OV788_Camera_ERROR
 #define RECORD_VIDEO_START                              0x01
 #define RECORD_VIDEO_STOP                               0x02
 #define RECORD_VIDEO_START_ERROR                        0x03
@@ -19,14 +16,26 @@
 
 @interface CTCameraHelper : NSObject
 
+/**
+ 摄像头协助器 单例
+ */
++ (CTCameraHelper *)SharedCameraHelper;
+
 #pragma mark >>> 基础设定相关 <<<
 
 /**
  设置 图像 加载视图
  @param view 视图
  @param isRetroflexion 图像是否 镜像显示
+ @param handler 摄像头启动结果回调
  */
-+ (void)SetCameraView:(UIView *)view Retroflexion:(BOOL)isRetroflexion;
++ (void)SetCameraView:(UIView *)view Retroflexion:(BOOL)isRetroflexion
+  CameraActiveHandler:(void (^)(BOOL status))handler;
+
+/**
+ 移除之前设置的View 释放内存
+ */
++ (void)DestroyedCameraView;
 
 /**
  设置 图像 长宽，默认 1280*720 （16:9）
@@ -58,7 +67,7 @@
  设备固件版本低于1.2.2时，需要采用本方法
  拍摄一张照片
  */
-+ (void)Capture:(NSString *)pathName Completion:(void (^)(BOOL))Block;
++ (void)Capture:(NSString *)pathName Completion:(void (^)(BOOL status))Block;
 
 /**
  拍摄2张照片，设备固件版本需要不小于1.2.2
@@ -66,7 +75,7 @@
  @param plPathName 表皮层 图片地址
  */
 + (void)CaptureNew:(NSString *)rgbPathName PLPathName:(NSString*)plPathName
-        Completion:(void (^)(BOOL))Block;
+        Completion:(void (^)(BOOL status))Block;
 
 #pragma mark >>> 高级设定相关 <<<
 
