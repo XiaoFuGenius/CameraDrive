@@ -8,9 +8,9 @@
 
 /**
  CameraDrive版本号
- 更新时间：2018.11.27 22:33
+ 更新时间：2019.06.19 18:36
  */
-#define CameraDrive_SDK_VERSION @"1.0.3"
+#define CameraDrive_SDK_VERSION @"1.0.5"
 
 #import <UIKit/UIKit.h>
 

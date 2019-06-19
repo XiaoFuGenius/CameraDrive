@@ -17,9 +17,9 @@
 @interface CTCameraHelper : NSObject
 
 /**
- 摄像头协助器 单例
+ 关闭，关于 摄像头启动、拍摄 的超时控制
  */
-+ (CTCameraHelper *)SharedCameraHelper;
++ (void)TimeoutControlDisabled:(BOOL)disabled;
 
 #pragma mark >>> 基础设定相关 <<<
 
@@ -48,6 +48,12 @@
 + (void)SetBitrate:(int)bitrate;
 
 #pragma mark >>> 摄像头开启、关闭 <<<
+
+/**
+ 此时是否可以启动摄像头
+ @return YES 可以启动，NO 需要 延迟1秒 再次执行判定；
+ */
++ (BOOL)StartIsAvailable;
 
 /**
  开启摄像头
@@ -84,5 +90,17 @@
  @param mode 0 表皮，1 真皮
  */
 + (void)SetLedMode:(int)mode;
+
+/**
+ 未成功激活摄像头时，触发原因是否为 蓝条检测
+ @return 蓝条检测 反馈
+ */
++ (BOOL)IsBlueStripConfirmed;
+
+/**
+ 取得 CameraHelper 的共享实例
+ @return CameraHelper 的共享实例
+ */
++ (CTCameraHelper *)SharedCameraHelper;
 
 @end
