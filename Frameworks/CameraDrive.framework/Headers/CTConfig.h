@@ -30,6 +30,8 @@
  */
 @property (nonatomic, copy) void (^captureFailedTypeBlock)(NSInteger type);
 
+@property (nonatomic, assign) int captureMode;  // 拍摄模式：0-优先拍摄表皮层，1-优先拍摄基底层（核心版本 >= 3.1.2）；默认 0；
+
 /**
  蓝条检测 开关
  开启以后，摄像头启动时，对 前十帧图像 执行 蓝条检测 算法，默认关闭；
